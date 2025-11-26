@@ -1,66 +1,70 @@
-  // Javascript code for Rock-paper-scissors game
- alert('WELCOME TO THE ROCK,PAPER SCISSORS GAME! Defeat the monster in 5 rounds(press the Fn + F12 key to open the console');
- console.log('PAGE LOADED... Let the game begin!');
- //function to get computer choice
-function getComputerChoice(){
-  let randomChoice = Math.floor(Math.random() * 3 + 1);
-  if (randomChoice === 1){
-     return 'rock';
-  }else if(randomChoice === 2){
-   return 'paper';
-  }else{
-   return 'scissors';
-  }
+const toggle = document.getElementById('toggle');
+toggle.addEventListener('click', () => {
+    document.body.style.backgroundColor = 'black';
+    document.body.style.color = '#fff';
+    choiceDisp.style.border = '2px solid #fff';
+    choiceDisp.style.backgroundColor = 'blue';
+});
 
-}
-         let computerChoice = getComputerChoice();
-        
+const lightMode = document.getElementById('remove');
+lightMode.addEventListener('click', () => {
+     document.body.style.backgroundColor = '#fff';
+    document.body.style.color = 'black';
+    choiceDisp.style.border = '2px solid black';
+    choiceDisp.style.backgroundColor = 'black';
+    choiceDisp.style.color = '#fff';
+});
 
-        //function for entire game logic
-  function playGame(){
-    for(i = 1; i <= 5; i++){
+const reset = document.getElementById('refresh');
+reset.addEventListener('click', () => {
+    location.reload();
+});
 
-//code gets user choice
-  let humanChoice = prompt('Enter rock, paper or scissors to defeat the monster(AI):');
-function getHumanChoice(humanChoice){
-}
- if(humanChoice === 'rock' || 'paper' || 'scissors'){
-  console.log('You:', humanChoice);
- }else{
-  console.log('Invalid input! , please enter rock,paper or scissors');
- }
- console.log('computer output:', computerChoice);
-       let humanScore = 0;
-       let computerScore = 0;
-      
-      
-       const humanSelection = getHumanChoice(humanChoice);
-       const computerSelection = getComputerChoice();
+
+
  
-       //function to play single round
-       function playRound(humanSelection, computerSelection){
-         if(humanChoice === 'paper' && computerChoice === 'rock' || humanChoice === 'scissors' && computerChoice === 'paper' || humanChoice === 'rock' && computerChoice === 'scissors'){
-          console.log('You beat monster!');
-          humanScore++;
-         }else if(humanChoice === computerChoice){
-          console.log('It is a tie!');
-         }else{ 
-          console.log('The monster defeated you!');
-          computerScore++
-         }
-          console.log(`Round: ${i}`);
-     console.log(`USER SCORE: ${humanScore}; COMPUTER SCORE: ${computerScore}`);
-    
-        }
-         playRound(humanSelection, computerSelection);
-           if (i === 5) { 
-      if (humanChoice > computerChoice) {
-        console.log(`GAME's OVER!, YOU WIN...`);
-      } else{
-        console.log(`GAME OVER!, The monster has defeated you...`);
-      } 
-     }  
-   }
-  }
-   playGame();
+const choiceDisp = document.querySelector('#display');
+const score = document.querySelector('#score');
+const resultDisp = document.querySelector('#result');
+const over = document.querySelector('#end');
 
+const choices = ['Rock', 'Paper', 'Scissors'];
+let playerScore = 0;
+let computerScore = 0;
+
+function playRound(playerChoice){
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
+ 
+    output = (playerChoice, computerChoice) => 
+        (playerChoice === computerChoice) ? "IT'S A TIE!" 
+        : (playerChoice === 'Rock' && computerChoice === 'Scissors') || (playerChoice === 'Paper' && computerChoice === 'Rock') || (playerChoice === 'Scissors' && computerChoice === 'Paper') ? 'YOU WIN!'
+        : 'YOU LOSE!';
+        const result = output(playerChoice, computerChoice);
+        
+       choiceDisp.textContent = `YOU: ${playerChoice}  |  COMPUTER: ${computerChoice}`;
+       resultDisp.textContent = result;
+
+       resultDisp.style.backgroundColor = result === "IT'S A TIE!" ? 'blue'
+       : result === 'YOU WIN!' ? 'green' : 'red';
+       resultDisp.style.border = '2px solid transparent';
+
+       if(result === 'YOU WIN!'){
+        playerScore++;
+        score.textContent = `YOU: ${playerScore} | COMPUTER: ${computerScore}`;
+       }else if(result === 'YOU LOSE!'){
+         computerScore++;
+        score.textContent = `YOU: ${playerScore} | COMPUTER: ${computerScore}`;
+       }else{
+        return;
+       }
+
+       if(playerScore === 5 && computerScore < 5){
+        over.textContent = 'YOU WON! GAME OVER';
+       }else if(computerScore === 5 && playerScore < 5){
+        over.textContent = 'YOU LOSE! DEFEATED...';
+       }else{
+        return;
+       }
+
+
+}
