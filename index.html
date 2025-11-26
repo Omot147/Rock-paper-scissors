@@ -4,8 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-paper_scissors</title>
+    <style>
+        body{
+            min-height: 100vh;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+             gap:30px;
+             padding: 20px;
+        }
+        .container h1{
+            text-align: center;
+            font-size: 40px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .container #display{
+            width:20em;
+            border: none;
+            border-radius: 25px;
+            background: #838383;
+            padding: 15px;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+
+
+        }
+        .container .wrapper{
+            display: flex;
+            gap: 15px;
+        }
+        .container .wrapper button{
+            width: 150px;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: rgb(51, 51, 204);
+            font-size: 19px;
+            transition:0.5s;
+        }
+        .container .wrapper button:hover{
+            transform: scale(1.1);
+            color: blue;
+            background: #fff;
+            border: 1px solid blue;
+        }
+        .container #score{
+            font-size: 22px;
+            font-weight: 500;
+        }
+        .container #result{
+            outline: 2px solid #0000ff ;
+            border-radius: 25px;
+            font-size: 26px;
+            font-weight: 550;
+            padding: 10px;
+        }
+        .toggle{
+            font-size: 18px;
+            position:absolute;
+            top:20px;
+        }
+        .toggle #refresh{
+            width: 100px;
+            height: 30px;
+            background: #0000ff;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+            transition: ease-in-out 0.5s;
+        }
+        .toggle #refresh:hover{
+            transform:scale(0.8);
+           background: #fff;
+           color: black;
+           border: 1px solid blue;
+        }
+        .container #end{
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+    </style>
 </head>
 <body>
+    <div class="toggle">
+    <label for="toggle">Enable dark mode</label>
+    <input type="checkbox" id="toggle">
+    <label for="mode">Remove dark mode</label>
+    <input type="checkbox" id="remove">
+    <button id="refresh">Reset</button>
+     </div>
+
+    <div class="container">
+        <h1>Rock Paper Scissors game</h1>
+        <div id="display"></div>
+        <div class="wrapper">
+            <button onclick="playRound('Rock')">Rock</button>
+            <button onclick="playRound('Paper')">Paper</button>
+            <button onclick="playRound('Scissors')">Scissors</button>
+        </div>
+        <div id="score">Score:</div>
+        <div id="result">Result</div>
+        <div id="end"></div>
+    </div>
     
     <script src="rock-game.js"></script>
 </body>
